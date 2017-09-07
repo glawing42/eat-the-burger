@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h1 class="text-center">EAT-DA-BURGER!</h1>
+  </div>
+</div>
+<br>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+
+    <h2 class="text-center">Burgers to be devoured!</h2>
+    <br>
+    <ul>
+      {{#each burgers}} {{#unless this.devour}}
+      <li>
+        {{this.burger_name}}
+
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devour" value="false">
+          <br>
+          <button type="submit">DEVOUR!</button>
+        </form>
+
+      </li>
+      {{/unless}} {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h2 class="text-center">Burgers that have been devoured!</h2>
+    <br>
+    <ul>
+      {{#each burgers}} {{#if this.devour}}
+      <li>
+        {{this.burger_name}}
+
+        <form action="/delete/{{this.id}}?_method=PUT" method="POST">
+        <input type="hidden" name="delete" value="true">
+        <br>
+        <button type="submit">DELETE!</button>
+        </form>
+
+      </li>
+      {{/if}} {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h2 class="text-center">Add a burger!</h2>
+    <br>
+    <form class="create-update-form" action="/" method="POST">
+
+      <div class="form-group">
+        <label for="burger">Burger Name:</label>
+        <input type="text" id="burger" name="name">
+      </div>
+
+      <div class="form-group" type="hidden">
+        <input type="hidden" name="devour" value="0">
+      </div>
+
+      <button type="submit">Add Burger</button>
+    </form>
+  </div>
+</div>
